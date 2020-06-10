@@ -1,19 +1,23 @@
 package com.ecommerce.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Component
+@Entity
 public class Product {
 private int productId;
 private String productName;
 private double productPrice;
-@Autowired
 private Category category;
 public Product() {
 	super();
 	// TODO Auto-generated constructor stub
+	System.out.println("product..");
 }
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO,generator="producttbl")
 public int getProductId() {
 	return productId;
 }

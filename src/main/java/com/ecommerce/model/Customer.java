@@ -1,9 +1,11 @@
 package com.ecommerce.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Component
+@Entity
 public class Customer {
 private int custometId;
 private String customerName;
@@ -11,14 +13,15 @@ private String customerAddress;
 private String customerEmail;
 private String customerPhoneNo;
 private String customerGender;
-@Autowired
 private Order order;
-@Autowired
 private Cart cart;
 public Customer() {
 	super();
 	// TODO Auto-generated constructor stub
+	System.out.println("customer.....");
 }
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO,generator="customertbl")
 public int getCustometId() {
 	return custometId;
 }

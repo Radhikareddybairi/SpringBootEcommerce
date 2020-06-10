@@ -2,23 +2,28 @@ package com.ecommerce.model;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-@Component
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity
 public class Order {
 private int orderId;
 private String orderNumber;
 private String orderName;
 private Date orderDate;
 private double orderAmount;
-@Autowired
 private Customer customer;
-@Autowired
 private Product product;
 public Order() {
 	super();
 	// TODO Auto-generated constructor stub
+	System.out.println("order....");
 }
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO,generator="ordertbl")
 public int getOrderId() {
 	return orderId;
 }
