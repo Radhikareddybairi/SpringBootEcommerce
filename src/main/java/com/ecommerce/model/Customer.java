@@ -1,19 +1,27 @@
 package com.ecommerce.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import org.springframework.context.annotation.Configuration;
+@Configuration
 @Entity
 public class Customer {
-private int custometId;
+private int customerId;
 private String customerName;
 private String customerAddress;
 private String customerEmail;
 private String customerPhoneNo;
 private String customerGender;
-private Order order;
+private Set<Order> order;
 private Cart cart;
 public Customer() {
 	super();
@@ -22,11 +30,11 @@ public Customer() {
 }
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO,generator="customertbl")
-public int getCustometId() {
-	return custometId;
+public int getCustomerId() {
+	return customerId;
 }
-public void setCustometId(int custometId) {
-	this.custometId = custometId;
+public void setCustomerId(int customerId) {
+	this.customerId = customerId;
 }
 public String getCustomerName() {
 	return customerName;
@@ -52,12 +60,15 @@ public String getCustomerGender() {
 public void setCustomerGender(String customerGender) {
 	this.customerGender = customerGender;
 }
-public Order getOrder() {
+@OneToMany(mappedBy="customer")
+public Set<Order> getOrder() {
 	return order;
 }
-public void setOrder(Order order) {
+public void setOrder(Set<Order> order) {
 	this.order = order;
 }
+@OneToOne(cascade=CascadeType.ALL)
+@JoinColumn(name="carId")
 public Cart getCart() {
 	return cart;
 }

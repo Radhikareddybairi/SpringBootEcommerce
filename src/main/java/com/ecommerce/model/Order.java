@@ -1,22 +1,27 @@
 package com.ecommerce.model;
 
-import java.util.Date;
+
+
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 @Entity
 public class Order {
 private int orderId;
 private String orderNumber;
 private String orderName;
-private Date orderDate;
+private String orderDate;
 private double orderAmount;
+private Set<Product> product;
 private Customer customer;
-private Product product;
 public Order() {
 	super();
 	// TODO Auto-generated constructor stub
@@ -42,10 +47,10 @@ public String getOrderName() {
 public void setOrderName(String orderName) {
 	this.orderName = orderName;
 }
-public Date getOrderDate() {
+public String getOrderDate() {
 	return orderDate;
 }
-public void setOrderDate(Date orderDate) {
+public void setOrderDate(String orderDate) {
 	this.orderDate = orderDate;
 }
 public double getOrderAmount() {
@@ -54,17 +59,19 @@ public double getOrderAmount() {
 public void setOrderAmount(double orderAmount) {
 	this.orderAmount = orderAmount;
 }
+@OneToMany(mappedBy="order")
+public Set<Product> getProduct() {
+	return product;
+}
+public void setProduct(Set<Product> product) {
+	this.product = product;
+}
 public Customer getCustomer() {
 	return customer;
 }
 public void setCustomer(Customer customer) {
 	this.customer = customer;
 }
-public Product getProduct() {
-	return product;
-}
-public void setProduct(Product product) {
-	this.product = product;
-}
+
 
 }

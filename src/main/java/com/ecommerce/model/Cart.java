@@ -1,16 +1,25 @@
 package com.ecommerce.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
 @Entity
 public class Cart {
 private int cartId;
 private int cartQuantity;
 private Customer customer;
-private Product product;
+private Set<Product> product;
 
 public Cart() {
 	super();
@@ -30,18 +39,22 @@ public int getCartQuantity() {
 public void setCartQuantity(int cartQuantity) {
 	this.cartQuantity = cartQuantity;
 }
+@OneToOne(cascade=CascadeType.ALL)
+@JoinColumn(name="customerId")
 public Customer getCustomer() {
 	return customer;
 }
 public void setCustomer(Customer customer) {
 	this.customer = customer;
 }
-public Product getProduct() {
+@OneToMany(mappedBy="cart")
+public Set<Product> getProduct() {
 	return product;
 }
-public void setProduct(Product product) {
+public void setProduct(Set<Product> product) {
 	this.product = product;
 }
+
 
 
 }
